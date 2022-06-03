@@ -1,0 +1,20 @@
+Bienvenido a CRONOS sistema de Horario de Pilar CORP
+Formato para sistema de horarios.
+Martes 8 de Marzo
+Entrada 08:00
+Comida 13:00
+Fin Comida 14:00
+Fin 18:00
+0) Cada mensaje va por separado. Super importante!
+1) Cada dia al principio se debe escribir el dia + el mes. Ejemplo:
+Martes 8 de Marzo.
+2) En cada momento del dia se debe escribir el horario correspondiente. Ejemplo: 
+Entrada 08:00
+Comida 13:00
+Fin Comida 14:00
+Fin 18:00
+3) Si no se toma horario de comida no se escribe el mensaje. El sistema lo toma automaticamente
+——
+Para kilómetros enviar:
+Kilómetros inicio 100.4
+Kilómetros fin 333
