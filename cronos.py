@@ -30,6 +30,8 @@ nuevo_dia = horario(1,1,1,1,1,1)
 def login(user):
     if (user == "camilapalacin"):
         nuevo_dia.user = "Camila Palacin - 0720405488000037379704"
+    if(user == "pupi_zanetti"):
+        nuevo_dia.user = "Pagos Pupi - tomas.s.ghi"
     else:
         pass
         #Lo de pupi
