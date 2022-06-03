@@ -93,7 +93,7 @@ def startCommand(update: Update, context: CallbackContext):
     print(update.effective_chat)
     print(update.effective_chat["username"])
     login(update.effective_chat["username"])
-    welcome_file = open('welcome.txt','r')
+    welcome_file = open('/app/welcome.txt','r')
     welcome_message = welcome_file.read()
     nuevo_dia.dia = 0
     context.bot.send_message(chat_id=update.effective_chat.id, text=welcome_message)
