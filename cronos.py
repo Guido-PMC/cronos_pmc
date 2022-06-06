@@ -10,6 +10,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 credenciales = os.environ['CREDS']
 updater = Updater(token=os.environ['TELEGRAM'])
+alert_telegram_bot_id = os.environ['TELEGRAM_BOT_ID']
+alert_telegram_channel_id = os.environ['TELEGRAM_CHANNEL_ID']
 
 dispatcher = updater.dispatcher
 global_day_cell_row = "0"
@@ -25,6 +27,14 @@ class horario:
         self.salida = salida
 nuevo_dia = horario(1,1,1,1,1,1)
 
+
+def telegram_message(message):
+    headers_telegram = {"Content-Type": "application/x-www-form-urlencoded"}
+    endpoint_telegram = "https://api.telegram.org/"+TELEGRAM_BOT_ID"/sendMessage"
+    mensaje_telegram = {"chat_id": alert_telegram_channel_id, "text": "Problemas en RIG"}
+    mensaje_telegram["text"] = message
+    response = requests.post(endpoint_telegram, headers=headers_telegram, data=mensaje_telegram).json()
+    return response
 
 
 def login(user):
@@ -120,8 +130,11 @@ def entradaCommand(update: Update, context: CallbackContext):
     try:
         updateCell(sheet, nuevo_dia.user, "B"+str(nuevo_dia.dia), data)
         context.bot.send_message(chat_id=update.effective_chat.id, text="Cargada entrada a las "+str(data))
+        telegram_message("Comienzo del dia: "+str(data)+"   - "+str(update.effective_chat["username"]))
     except Exception as e:
         context.bot.send_message(chat_id=update.effective_chat.id, text="No se registro correctamente el dia. Comunicarse con GUIDO !!!! ")
+        telegram_message("Error cargando comienzo: "+str(data)+"   - "+str(update.effective_chat["username"]))
+
 
 def comidaCommand(update: Update, context: CallbackContext):
     print(update.effective_chat)
@@ -130,11 +143,11 @@ def comidaCommand(update: Update, context: CallbackContext):
     print(data)
     try:
         updateCell(sheet, nuevo_dia.user, "C"+str(nuevo_dia.dia), data)
-        context.bot.send_message(chat_id=update.effective_chat.id, text="Cargada entrada a las "+str(data))
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Cargada comida a las "+str(data))
+        telegram_message("Comienzo Comida: "+str(data)+"   - "+str(update.effective_chat["username"]))
     except Exception as e:
         context.bot.send_message(chat_id=update.effective_chat.id, text="No se registro correctamente el dia. Comunicarse con GUIDO !!!! ")
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Cargada comida a las "+str(data))
-
+        telegram_message("Error cargando comida: "+str(data)+"   - "+str(update.effective_chat["username"]))
 
 def finComidaCommand(update: Update, context: CallbackContext):
     print(update.effective_chat)
@@ -143,10 +156,12 @@ def finComidaCommand(update: Update, context: CallbackContext):
     print(data)
     try:
         updateCell(sheet, nuevo_dia.user, "D"+str(nuevo_dia.dia), data)
-        context.bot.send_message(chat_id=update.effective_chat.id, text="Cargada entrada a las "+str(data))
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Cargada fin comida a las "+str(data))
+        telegram_message("Fin Comida: "+str(data)+"   - "+str(update.effective_chat["username"]))
     except Exception as e:
         context.bot.send_message(chat_id=update.effective_chat.id, text="No se registro correctamente el dia. Comunicarse con GUIDO !!!! ")
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Cargada fin comida a las "+str(data))
+        telegram_message("Error cargando: "+str(data)+"   - "+str(update.effective_chat["username"]))
+
 
 def finCommand(update: Update, context: CallbackContext):
     print(update.effective_chat)
@@ -155,10 +170,11 @@ def finCommand(update: Update, context: CallbackContext):
     print(data)
     try:
         updateCell(sheet, nuevo_dia.user, "E"+str(nuevo_dia.dia), data)
-        context.bot.send_message(chat_id=update.effective_chat.id, text="Cargada entrada a las "+str(data))
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Cargado fin del dia a las "+str(data)+"\n Fiuj! ")
+        telegram_message("Fin dia: "+str(data)+"   - "+str(update.effective_chat["username"]))
     except Exception as e:
         context.bot.send_message(chat_id=update.effective_chat.id, text="No se registro correctamente el dia. Comunicarse con GUIDO !!!! ")
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Cargado fin del dia a las "+str(data)+"\n Fiuj! ")
+        telegram_message("Error fin del dia: "+str(data)+"   - "+str(update.effective_chat["username"]))
 
 def kilometrosCommand(update: Update, context: CallbackContext):
     print(update.effective_chat)
@@ -168,9 +184,10 @@ def kilometrosCommand(update: Update, context: CallbackContext):
     try:
         updateCell(sheet, nuevo_dia.user, "K"+str(nuevo_dia.dia), data)
         context.bot.send_message(chat_id=update.effective_chat.id, text="Cargada entrada a las "+str(data))
+        telegram_message("Cargados Kilometros: "+str(data)+"   - "+str(update.effective_chat["username"]))
     except Exception as e:
         context.bot.send_message(chat_id=update.effective_chat.id, text="No se registro correctamente el dia. Comunicarse con GUIDO !!!! ")
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Cargado Kilometros "+str(data)+"\n NIIIIIUM! ")
+        telegram_message("No se registro Kilometros: "+str(data)+"   - "+str(update.effective_chat["username"]))
 
 
 def send_message(response, update,context):
@@ -183,8 +200,6 @@ dispatcher.add_handler(CommandHandler("Comida", comidaCommand))
 dispatcher.add_handler(CommandHandler("Fin_Comida", finComidaCommand))
 dispatcher.add_handler(CommandHandler("Fin", finCommand))
 dispatcher.add_handler(CommandHandler("Kilometros", kilometrosCommand))
-
-
 
 
 updater.start_polling()
