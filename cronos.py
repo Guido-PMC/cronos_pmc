@@ -30,7 +30,7 @@ nuevo_dia = horario(1,1,1,1,1,1)
 
 def telegram_message(message):
     headers_telegram = {"Content-Type": "application/x-www-form-urlencoded"}
-    endpoint_telegram = "https://api.telegram.org/"+TELEGRAM_BOT_ID"/sendMessage"
+    endpoint_telegram = "https://api.telegram.org/"+TELEGRAM_BOT_ID+"/sendMessage"
     mensaje_telegram = {"chat_id": alert_telegram_channel_id, "text": "Problemas en RIG"}
     mensaje_telegram["text"] = message
     response = requests.post(endpoint_telegram, headers=headers_telegram, data=mensaje_telegram).json()
