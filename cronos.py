@@ -10,8 +10,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 credenciales = os.environ['CREDS']
 updater = Updater(token=os.environ['TELEGRAM'])
-alert_telegram_bot_id = os.environ['TELEGRAM_BOT_ID']
-alert_telegram_channel_id = os.environ['TELEGRAM_CHANNEL_ID']
+alert_telegram_bot_id = os.environ['TELEGRAMBOTID']
+alert_telegram_channel_id = os.environ['TELEGRAMCHANNELID']
 
 dispatcher = updater.dispatcher
 global_day_cell_row = "0"
