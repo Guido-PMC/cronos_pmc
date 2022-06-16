@@ -49,7 +49,7 @@ def login(user):
 def sanitize_string(string):
     a,b = 'áéíóúüñÁÉÍÓÚÜÑ','aeiouunAEIOUUN'
     trans = string.maketrans(a,b)
-    return trans
+    return string.translate(trans)
 
 def getCell(sheet, worksheet, string):
     scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
