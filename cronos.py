@@ -199,7 +199,7 @@ def send_message(response, update,context):
     context.bot.send_message(chat_id=update.effective_chat.id, text=response)
 
 dispatcher.add_handler(CommandHandler("start", startCommand))
-dispatcher.add_handler(CommandHandler("Dia", diaCommand))
+dispatcher.add_handler(CommandHandler("Dia" or "día", diaCommand))
 dispatcher.add_handler(CommandHandler("Entrada", entradaCommand))
 dispatcher.add_handler(CommandHandler("Comida", comidaCommand))
 dispatcher.add_handler(CommandHandler("Fin_Comida", finComidaCommand))
