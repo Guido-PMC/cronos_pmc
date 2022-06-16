@@ -125,6 +125,7 @@ def diaCommand(update: Update, context: CallbackContext):
     if(day_cell_row):
         nuevo_dia.dia = day_cell_row
         print("Dia cargado correctamente: "+str(day_cell_row))
+        telegram_message("Dia cargado correctmente: "+str(day_cell_row))
 
 
 def entradaCommand(update: Update, context: CallbackContext):
