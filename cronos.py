@@ -116,7 +116,7 @@ def startCommand(update: Update, context: CallbackContext):
 def diaCommand(update: Update, context: CallbackContext):
     print(update.effective_chat)
     login(update.effective_chat["username"])
-    string = (update.message.text)
+    string = str(sanitize_string(update.message.text))
     excel_day_name,day_name,day_cell_row = get_day_cell_by_string(string, sheet,cbu="")
     day_cell_row = check_days(excel_day_name,day_name,day_cell_row)
     if(day_cell_row):
