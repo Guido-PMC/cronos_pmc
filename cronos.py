@@ -126,6 +126,7 @@ def diaCommand(update: Update, context: CallbackContext):
         nuevo_dia.dia = day_cell_row
         print("Dia cargado correctamente: "+str(day_cell_row))
         telegram_message("Dia cargado correctmente: "+str(day_cell_row))
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Dia cargado correctmente: "+str(day_cell_row))
 
 
 def entradaCommand(update: Update, context: CallbackContext):
