@@ -92,6 +92,8 @@ def check_days(string, compare,day_cell_row):
 def get_day_cell_by_string(string, sheet, cbu):
     day_cell_row = 0
     cbu = nuevo_dia.user
+    print(string)
+    print(typeof(string))
     month_cell_row, month_cell_column = getCell(sheet, cbu ,string.lower().split(None,4)[4]) #BUSCO LA CELDA DEL MES DEL AÑO EL CUAL ESCRIBIO EN EL GRUPO DE TELEGRAM LO DEVUELVO EN 2 VARIABLES
     day_number = int(string.lower().split(None,4)[2])
     day_cell_row = int(day_number) + int(month_cell_row)
