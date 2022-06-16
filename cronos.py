@@ -199,11 +199,11 @@ def send_message(response, update,context):
     context.bot.send_message(chat_id=update.effective_chat.id, text=response)
 
 dispatcher.add_handler(CommandHandler("start", startCommand))
-dispatcher.add_handler(CommandHandler("día", diaCommand))
-dispatcher.add_handler(CommandHandler("Entrada", entradaCommand))
-dispatcher.add_handler(CommandHandler("Comida", comidaCommand))
-dispatcher.add_handler(CommandHandler("Fin_Comida", finComidaCommand))
-dispatcher.add_handler(CommandHandler("Fin", finCommand))
+dispatcher.add_handler(CommandHandler("day", diaCommand))
+dispatcher.add_handler(CommandHandler("begin", entradaCommand))
+dispatcher.add_handler(CommandHandler("food", comidaCommand))
+dispatcher.add_handler(CommandHandler("end_food", finComidaCommand))
+dispatcher.add_handler(CommandHandler("end", finCommand))
 dispatcher.add_handler(CommandHandler("Kilometros", kilometrosCommand))
 
 
