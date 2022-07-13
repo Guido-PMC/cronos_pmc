@@ -52,8 +52,6 @@ def sanitize_string(string):
     return string.translate(trans)
 
 
-
-
 def getCell(sheet, worksheet, string):
     scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
     creds = ServiceAccountCredentials.from_json_keyfile_name(credenciales, scope)
@@ -131,6 +129,7 @@ def diaCommand(update: Update, context: CallbackContext):
 
 def entradaCommand(update: Update, context: CallbackContext):
     print(update.effective_chat)
+    login(update.effective_chat["username"])
     string = update.message.text
     data = string.lower().split(None,4)[1]
     print(data)
@@ -145,6 +144,7 @@ def entradaCommand(update: Update, context: CallbackContext):
 
 def comidaCommand(update: Update, context: CallbackContext):
     print(update.effective_chat)
+    login(update.effective_chat["username"])
     string = update.message.text
     data = string.lower().split(None,4)[1]
     print(data)
@@ -158,6 +158,7 @@ def comidaCommand(update: Update, context: CallbackContext):
 
 def finComidaCommand(update: Update, context: CallbackContext):
     print(update.effective_chat)
+    login(update.effective_chat["username"])
     string = update.message.text
     data = string.lower().split(None,4)[1]
     print(data)
@@ -172,6 +173,7 @@ def finComidaCommand(update: Update, context: CallbackContext):
 
 def finCommand(update: Update, context: CallbackContext):
     print(update.effective_chat)
+    login(update.effective_chat["username"])
     string = update.message.text
     data = string.lower().split(None,4)[1]
     print(data)
@@ -185,6 +187,7 @@ def finCommand(update: Update, context: CallbackContext):
 
 def kilometrosCommand(update: Update, context: CallbackContext):
     print(update.effective_chat)
+    login(update.effective_chat["username"])
     string = update.message.text
     data = string.lower().split(None,4)[1]
     print(data)
